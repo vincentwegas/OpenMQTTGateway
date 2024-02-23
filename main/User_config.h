@@ -52,12 +52,12 @@
 
 // Uncomment to use the MAC address first 4 digits in the format of 5566 as the suffix of the short gateway name.
 // Any definition of Gateway_Name will be ignored. The Gateway_Short_name _ MAC will be used as the access point name.
-//#define USE_MAC_AS_GATEWAY_NAME
+#define USE_MAC_AS_GATEWAY_NAME
 #ifndef Gateway_Name
 #  define Gateway_Name "OpenMQTTGateway"
 #endif
 #ifndef Gateway_Short_Name
-#  define Gateway_Short_Name "smartyme"
+#  define Gateway_Short_Name "SmartyMe_GW"
 #endif
 
 #ifndef Base_Topic
@@ -171,10 +171,10 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 #  define MQTT_PASS "your_password"
 #endif
 #ifndef MQTT_SERVER
-#  define MQTT_SERVER "192.168.1.17"
+#  define MQTT_SERVER "mqtt.smartyme.de"
 #endif
 #ifndef MQTT_PORT
-#  define MQTT_PORT "1883"
+#  define MQTT_PORT "8883"
 #endif
 
 #ifndef GeneralTimeOut
@@ -208,7 +208,7 @@ const char* certificate PROGMEM = R"EOF("
 #  endif
 
 #  ifndef MQTT_SECURE_DEFAULT
-#    define MQTT_SECURE_DEFAULT false
+#    define MQTT_SECURE_DEFAULT true
 #  endif
 
 #  ifndef MQTT_CERT_VALIDATE_DEFAULT
@@ -248,7 +248,7 @@ const char* alpnProtocols[] = {"x-amzn-mqtt-ca", NULL};
 #  endif
 
 #  ifndef MQTT_SECURE_SELF_SIGNED
-#    define MQTT_SECURE_SELF_SIGNED 0
+#    define MQTT_SECURE_SELF_SIGNED 1
 #  endif
 
 #  ifndef MQTT_SECURE_SELF_SIGNED_CLIENT
@@ -408,7 +408,7 @@ int lowpowermode = DEFAULT_LOW_POWER_MODE;
 #  define ota_hostname Gateway_Name
 #endif
 #ifndef gw_password
-#  define gw_password ""
+#  define gw_password "smartyme"
 #endif
 #ifndef ota_port
 #  define ota_port 8266
