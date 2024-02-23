@@ -57,11 +57,11 @@
 #  define Gateway_Name "OpenMQTTGateway"
 #endif
 #ifndef Gateway_Short_Name
-#  define Gateway_Short_Name "OMG"
+#  define Gateway_Short_Name "smartyme"
 #endif
 
 #ifndef Base_Topic
-#  define Base_Topic "home/"
+#  define Base_Topic "smartyme/"
 #endif
 
 /*-------------DEFINE YOUR NETWORK PARAMETERS BELOW----------------*/
