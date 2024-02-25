@@ -29,7 +29,7 @@
 #define user_config_h
 /*-------------------VERSION----------------------*/
 #ifndef OMG_VERSION
-#  define OMG_VERSION "version_tag"
+#  define OMG_VERSION "v1.7.0"
 #endif
 
 /*-------------CONFIGURE WIFIMANAGER-------------(only ESP8266 & SONOFF RFBridge)*/
@@ -165,10 +165,10 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 #endif
 
 #ifndef MQTT_USER
-#  define MQTT_USER "your_username"
+#  define MQTT_USER "mqtt"
 #endif
 #ifndef MQTT_PASS
-#  define MQTT_PASS "your_password"
+#  define MQTT_PASS "password"
 #endif
 #ifndef MQTT_SERVER
 #  define MQTT_SERVER "mqtt.smartyme.de"
@@ -194,11 +194,18 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 
 // The root ca certificate used for validating the MQTT broker
 // The certificate must be in PEM ascii format
+
+// If used, this should be set to the root CA certificate of the server hosting the firmware.
+#   define PRIVATE_CA 
+#    ifdef PRIVATE_CA
+#      include "certs/private_ca_cert.h"
+#   else
 const char* certificate PROGMEM = R"EOF("
 -----BEGIN CERTIFICATE-----
 ...
 -----END CERTIFICATE-----
 ")EOF";
+#    endif
 
 #  define ATTEMPTS_BEFORE_BG 10 // Number of wifi connection attempts before going to BG protocol
 #  define ATTEMPTS_BEFORE_B  20 // Number of wifi connection attempts before going to B protocol
@@ -249,6 +256,7 @@ const char* alpnProtocols[] = {"x-amzn-mqtt-ca", NULL};
 
 #  ifndef MQTT_SECURE_SELF_SIGNED
 #    define MQTT_SECURE_SELF_SIGNED 1
+#    define PRIVATE_CERTS 1
 #  endif
 
 #  ifndef MQTT_SECURE_SELF_SIGNED_CLIENT
