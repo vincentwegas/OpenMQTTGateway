@@ -126,7 +126,7 @@ void announceDeviceTrigger(bool use_gateway_info,
 #endif
 
 #ifndef GATEWAY_MANUFACTURER
-#  define GATEWAY_MANUFACTURER "OMG_community"
+#  define GATEWAY_MANUFACTURER "SmartyMe - powered by OpenMQTTGateway Community"
 #endif
 
 /*-------------- Auto discovery macros-----------------*/

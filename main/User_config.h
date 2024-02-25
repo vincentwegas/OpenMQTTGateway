@@ -195,7 +195,7 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 // The root ca certificate used for validating the MQTT broker
 // The certificate must be in PEM ascii format
 
-// If used, this should be set to the root CA certificate of the server hosting the firmware.
+// If used, this should be set to the root CA certificate to private CA
 #   define PRIVATE_CA 
 #    ifdef PRIVATE_CA
 #      include "certs/private_ca_cert.h"
