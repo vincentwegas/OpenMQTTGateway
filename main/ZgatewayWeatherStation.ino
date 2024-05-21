@@ -1,7 +1,7 @@
 /*
   OpenMQTTGateway  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker
    Send and receiving command by MQTT
 
   This gateway enables to:
@@ -30,12 +30,7 @@
 WeatherStationDataRx wsdr(RF_WS_RECEIVER_GPIO, true);
 
 void PairedDeviceAdded(byte newID) {
-#  if defined(ESP8266) || defined(ESP32)
   Serial.printf("ZgatewayWeatherStation: New device paired %d\r\n", newID);
-#  else
-  Serial.print("ZgatewayWeatherStation: New device paired ");
-  Serial.println(newID, DEC);
-#  endif
   StaticJsonDocument<JSON_MSG_BUFFER> RFdataBuffer;
   JsonObject RFdata = RFdataBuffer.to<JsonObject>();
   RFdata["sensor"] = newID;

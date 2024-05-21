@@ -1,7 +1,7 @@
 /*
   OpenMQTTGateway Addon  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker
    Send and receiving command by MQTT
 
    This is the Home Assistant MQTT Discovery addon.
@@ -393,9 +393,9 @@ void createDiscovery(const char* sensor_type,
       device["mdl"] = device_model;
     }
 
-    // generate unique device name by adding the second half of the device_id only if device_name and device_id are different
+    // generate unique device name by adding the second half of the device_id only if device_name and device_id are different and we don't want to use the BLE name
     if (device_name[0]) {
-      if (strcmp(device_id, device_name) != 0 && device_id[0]) {
+      if (strcmp(device_id, device_name) != 0 && device_id[0] && !ForceDeviceName) {
         device["name"] = device_name + String("-") + String(device_id + 6);
       } else {
         device["name"] = device_name;
@@ -480,7 +480,6 @@ void pubMqttDiscovery() {
                   "", "", "", "", false, // device name, device manufacturer, device model, device ID, retain
                   stateClassMeasurement //State Class
   );
-#  if defined(ESP8266) || defined(ESP32)
   createDiscovery("sensor", //set Type
                   subjectSYStoMQTT, "SYS: Free memory", (char*)getUniqueId("freemem", "").c_str(), //set state_topic,name,uniqueId
                   will_Topic, "data_size", "{{ value_json.freemem }}", //set availability_topic,device_class,value_template,
@@ -519,7 +518,7 @@ void pubMqttDiscovery() {
                   stateClassNone, //State Class
                   "false", "true" //state_off, state_on
   );
-#    ifdef RGB_INDICATORS
+#  ifdef RGB_INDICATORS
   createDiscovery("number", //set Type
                   subjectSYStoMQTT, "SYS: LED Brightness", (char*)getUniqueId("rgbb", "").c_str(), //set state_topic,name,uniqueId
                   will_Topic, "", "{{ (value_json.rgbb/2.55) | round(0) }}", //set availability_topic,device_class,value_template,
@@ -529,9 +528,9 @@ void pubMqttDiscovery() {
                   "", "", "", "", false, // device name, device manufacturer, device model, device ID, retain,
                   stateClassNone //State Class
   );
-#    endif
+#  endif
 
-#    ifdef ZdisplaySSD1306
+#  ifdef ZdisplaySSD1306
   createDiscovery("switch", //set Type
                   subjectSSD1306toMQTT, "SSD1306: Control", (char*)getUniqueId("onstate", "").c_str(), //set state_topic,name,uniqueId
                   will_Topic, "", "{{ value_json.onstate }}", //set availability_topic,device_class,value_template,
@@ -561,9 +560,9 @@ void pubMqttDiscovery() {
                   "", "", "", "", false, // device name, device manufacturer, device model, device ID, retain
                   stateClassNone //State Class
   );
-#    endif
+#  endif
 
-#    ifndef ESP32_ETHERNET
+#  ifndef ESP32_ETHERNET
   createDiscovery("sensor", //set Type
                   subjectSYStoMQTT, "SYS: RSSI", (char*)getUniqueId("rssi", "").c_str(), //set state_topic,name,uniqueId
                   will_Topic, "signal_strength", "{{ value_json.rssi }}", //set availability_topic,device_class,value_template,
@@ -573,7 +572,6 @@ void pubMqttDiscovery() {
                   "", "", "", "", false, // device name, device manufacturer, device model, device ID, retain
                   stateClassNone //State Class
   );
-#    endif
 #  endif
 #  if defined(ESP32) && !defined(NO_INT_TEMP_READING)
   createDiscovery("sensor", //set Type
@@ -1302,4 +1300,6 @@ void pubMqttDiscovery() {
 #    endif
 #  endif
 }
+#else
+void pubMqttDiscovery() {}
 #endif

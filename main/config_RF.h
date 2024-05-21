@@ -1,7 +1,7 @@
 /*  
-  OpenMQTTGateway  - ESP8266 or Arduino program for home automation 
+  Theengs OpenMQTTGateway - We Unite Sensors in One Open-Source Interface
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker 
    Send and receiving command by MQTT
  
    This files enables to set your parameter for the radiofrequency gateways (ZgatewayRF and ZgatewayRF2) with RCswitch and newremoteswitch library
@@ -80,7 +80,7 @@ struct RTL_433device {
   bool isDisc;
 };
 
-const char parameters[40][4][24] = {
+const char parameters[50][4][24] = {
     // RTL_433 key, name, unit, device_class
     {"temperature_C", "temperature", "°C", "temperature"},
     {"temperature_1_C", "temperature", "°C", "temperature"},
@@ -88,6 +88,7 @@ const char parameters[40][4][24] = {
     {"temperature_F", "temperature", "°F", "temperature"},
     {"time", "timestamp", "", "timestamp"},
     {"battery_ok", "battery", "%", "battery"},
+    {"battery_mV", "battery", "mV", "voltage"},
     {"humidity", "humidity", "%", "humidity"},
     {"moisture", "moisture", "%", "humidity"},
     {"pressure_hPa", "pressure", "hPa", "pressure"},
@@ -108,19 +109,26 @@ const char parameters[40][4][24] = {
     {"rain_rate_in_h", "rain", "in/h", "precipitation_intensity"},
     {"rssi", "rssi", "dB", "signal_strength"},
     {"snr", "snr", "dB", ""},
-    {"noise", "noise", "dB", ""},
-    {"depth_cm", "depth", "cm", ""},
+    {"noise", "noise", "dB", "sound_pressure"},
+    {"depth_cm", "depth", "cm", "distance"},
     {"power_W", "power", "W", "power"},
-    {"light_lux", "light", "lx", ""},
-    {"lux", "lux", "lx", ""},
-    {"uv", "uv", "UV index", ""},
-    {"uvi", "uvi", "UV index", ""},
-    {"storm_dist", "storm distance", "mi", ""},
-    {"strike_distance", "strike distance", "mi", ""},
+    {"light_lux", "light", "lx", "illuminance"},
+    {"lux", "lux", "lx", "illuminance"},
+    {"uvi", "UVI", "UV index", ""},
+    {"uv", "UV", "UV level", ""},
+    {"storm_dist", "storm distance", "mi", "distance"},
+    {"storm_dist_km", "storm distance", "km", "distance"},
+    {"strike_count", "strike count", "", ""}, // from rtl_433_mqtt_hass.py
+    {"strike_distance", "strike distance", "mi", "distance"},
+    {"strike_distance_km", "strike distance", "km", "distance"},
+    {"co2_ppm", "Carbon Dioxide", "ppm", "carbon_dioxide"},
+    {"pm2_5_ug_m3", "PM2.5", "μg/m³", "pm25"},
+    {"pm10_ug_m3", "PM10", "μg/m³", "pm10"},
+    {"estimated_pm10_0_ug_m3", "estimated PM10", "μg/m³", "pm10"},
+    {"pm1_ug_m3", "PM1", "μg/m³", "pm1"},
     {"tamper", "tamper", "", ""},
     {"alarm", "alarm", "", ""},
     {"motion", "motion", "", "motion"},
-    {"strike_count", "strike count", "", ""}, // from rtl_433_mqtt_hass.py
     {"event", "Status", "", "moisture"}};
 #  endif
 #  ifdef RTL_433_DISCOVERY_LOGGING
@@ -215,10 +223,6 @@ RFConfig_s RFConfig;
 #    define RF_RECEIVER_GPIO 0 // D3 on nodemcu // put 4 with rf bridge direct mod
 #  elif ESP32
 #    define RF_RECEIVER_GPIO 27 // D27 on DOIT ESP32
-#  elif __AVR_ATmega2560__
-#    define RF_RECEIVER_GPIO 1 //1 = D3 on mega
-#  else
-#    define RF_RECEIVER_GPIO 1 //1 = D3 on arduino
 #  endif
 #endif
 
@@ -227,8 +231,6 @@ RFConfig_s RFConfig;
 #    define RF_EMITTER_GPIO 3 // RX on nodemcu if it doesn't work with 3, try with 4 (D2) // put 5 with rf bridge direct mod
 #  elif ESP32
 #    define RF_EMITTER_GPIO 12 // D12 on DOIT ESP32
-#  elif __AVR_ATmega2560__
-#    define RF_EMITTER_GPIO 4
 #  else
 //IMPORTANT NOTE: On arduino UNO connect IR emitter pin to D9 , comment #define IR_USE_TIMER2 and uncomment #define IR_USE_TIMER1 on library <library>IRremote/boarddefs.h so as to free pin D3 for RF RECEIVER PIN
 //RF PIN definition

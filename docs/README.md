@@ -1,6 +1,8 @@
 OpenMQTTGateway aims to unify various technologies and protocols into a single firmware. This reduces the need for multiple physical bridges and streamlines diverse technologies under the widely-used [MQTT](http://mqtt.org/) protocol.
 
-![Overview of the protocols and compatible controllers](./img/OpenMQTTGateway.png)
+<div style="text-align: center;">
+<img src="img/OpenMQTTGateway.png" alt="Overview of the protocols and compatible controllers" style="max-width: 100%; height: auto;">
+</div>
 
 # What is an MQTT gateway or bridge ?
 
@@ -21,7 +23,7 @@ OpenMQTTGateway integrates with established technologies, such as 433mhz/315mhz 
 To have an overview of the supported PIR, door, water, temperature, smoke sensors, sirens, rings, beacons, switches & weather stations you can take a look to the 
 [compatible devices list](https://compatible.openmqttgateway.com/index.php/devices)
 
-You can run OpenMQTTGateway on a wide variety of [boards](https://compatible.openmqttgateway.com/index.php/boards/), ESP32, ESP8266, Arduino MEGA, UNO (with limitation).
+You can run OpenMQTTGateway on a wide variety of [boards](https://compatible.openmqttgateway.com/index.php/boards/), ESP32, ESP8266, ESP32S3, ESP32C3.
 BLE to MQTT gateway can also run on Raspberry Pi, Windows or Unix computers thanks to [Theengs Gateway](https://theengs.github.io/gateway/).
 
 Using MQTT, you can seamlessly integrate with home automation platforms such as OpenHAB, Home Assistant, and others, or with IoT software like Node-Red.
@@ -67,9 +69,13 @@ Support open-source development through sponsorship and gain exclusive access to
 
 ### Theengs Bridge, BLE gateway with external antenna
 
-[Theengs bridge](https://shop.theengs.io/products/theengs-bridge-esp32-ble-mqtt-gateway-with-ethernet-and-external-antenna) is a powerfull BLE to MQTT gateway for over [90 sensors](https://decoder.theengs.io/devices/devices.html). Equipped with an Ethernet port, and external antenna, ensuring an enhanced range for your BLE sensors. It supports also WiFi connectivity.
+[Theengs bridge](https://shop.theengs.io/products/theengs-bridge-esp32-ble-mqtt-gateway-with-ethernet-and-external-antenna) is a powerfull BLE to MQTT gateway for over [100 sensors](https://decoder.theengs.io/devices/devices.html). Equipped with an Ethernet port, and external antenna, ensuring an enhanced range for your BLE sensors. It supports also WiFi connectivity.
 
-[![Theengs bridge view](./img/Theengs-Bridge-ble-gateway.png)](https://shop.theengs.io/products/theengs-bridge-esp32-ble-mqtt-gateway-with-ethernet-and-external-antenna)
+<div style="text-align: center;">
+    <a href="https://shop.theengs.io/products/theengs-bridge-esp32-ble-mqtt-gateway-with-ethernet-and-external-antenna" target="_blank" rel="noopener noreferrer">
+    <img src="img/Theengs-Bridge-ble-gateway.png" alt="Theengs bridge view" style="max-width: 100%; height: auto;">
+    </a>
+</div>
 
 ### Theengs Plug, BLE gateway and Smart Plug
 
@@ -81,7 +87,11 @@ Support open-source development through sponsorship and gain exclusive access to
 * Presence detection (beta),
 * Local connectivity first.
 
-[![Theengs plug view](./img/Theengs-Plug-OpenMQTTGateway.png)](https://shop.theengs.io/products/theengs-plug-smart-plug-ble-gateway-and-energy-consumption)
+<div style="text-align: center;">
+    <a href="https://shop.theengs.io/products/theengs-plug-smart-plug-ble-gateway-and-energy-consumption" target="_blank" rel="noopener noreferrer">
+    <img src="img/Theengs-Plug-OpenMQTTGateway.png" alt="Theengs plug view" style="max-width: 100%; height: auto;">
+    </a>
+</div>
 
 Support the project by purchasing the [Theengs bridge](https://shop.theengs.io/products/theengs-bridge-esp32-ble-mqtt-gateway-with-ethernet-and-external-antenna) or the [Theengs plug](https://shop.theengs.io/products/theengs-plug-smart-plug-ble-gateway-and-energy-consumption)
 

@@ -1,7 +1,7 @@
 /*  
-  OpenMQTTGateway  - ESP8266 or Arduino program for home automation 
+  Theengs OpenMQTTGateway - We Unite Sensors in One Open-Source Interface
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker 
    Send and receiving command by MQTT
  
    This files enables to set your parameter for the bluetooth low energy gateway (beacons detection)
@@ -116,15 +116,9 @@ extern String stateBTMeasures(bool);
 #  define HassPresence false //true if we publish into Home Assistant presence topic
 #endif
 
-#define HMSerialSpeed 9600 // Communication speed with the HM module, softwareserial doesn't support 115200
-//#define HM_BLUE_LED_STOP true //uncomment to stop the blue led light of HM1X
-
-#define BLEdelimiter       "4f4b2b444953413a" // OK+DISA:
-#define BLEEndOfDiscovery  "4f4b2b4449534345" // OK+DISCE
-#define BLEdelimiterLength 16
-#define CRLR               "0d0a"
-#define CRLR_Length        4
-#define BLE_CNCT_TIMEOUT   3000
+#ifndef BLE_CNCT_TIMEOUT
+#  define BLE_CNCT_TIMEOUT 3000
+#endif
 
 unsigned long scanCount = 0;
 
@@ -210,6 +204,7 @@ struct BLEAction {
 
 struct BLEdevice {
   char macAdr[18];
+  char name[20];
   int macType;
   bool isDisc;
   bool isWhtL;

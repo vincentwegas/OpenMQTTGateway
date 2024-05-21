@@ -1,7 +1,7 @@
 /*
   OpenMQTTGateway  - ESP8266 or Arduino program for home automation
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker
    Send and receiving command by MQTT
 
    This files enables to set your parameter for the Home assistant mqtt Discovery
@@ -129,6 +129,10 @@ void announceDeviceTrigger(bool use_gateway_info,
 #  define GATEWAY_MANUFACTURER "SmartyMe - powered by OpenMQTTGateway Community"
 #endif
 
+#ifndef ForceDeviceName
+#  define ForceDeviceName false // Set to true to force the device name to be from the name of the device and not the model
+#endif
+
 /*-------------- Auto discovery macros-----------------*/
 // Set the line below to true so as to have autodiscovery working with OpenHAB
 #ifndef OpenHABDiscovery
@@ -198,19 +202,24 @@ const char* availableHASSClasses[] = {"battery",
                                       "lock",
                                       "motion",
                                       "moving",
+                                      "pm1",
                                       "pm10",
                                       "pm25",
                                       "power",
                                       "power_factor",
+                                      "precipitation",
+                                      "precipitation_intensity",
                                       "pressure",
                                       "problem",
                                       "restart",
                                       "signal_strength",
+                                      "sound_pressure",
                                       "temperature",
                                       "timestamp",
                                       "voltage",
                                       "water",
                                       "weight",
+                                      "wind_speed",
                                       "window"};
 
 // From https://github.com/home-assistant/core/blob/d7ac4bd65379e11461c7ce0893d3533d8d8b8cbf/homeassistant/const.py#L379

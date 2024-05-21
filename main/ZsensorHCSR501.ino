@@ -1,7 +1,7 @@
 /*  
-  OpenMQTTGateway Addon  - ESP8266 or Arduino program for home automation 
+  Theengs OpenMQTTGateway - We Unite Sensors in One Open-Source Interface
 
-   Act as a wifi or ethernet gateway between your 433mhz/infrared IR signal  and a MQTT broker 
+   Act as a gateway between your 433mhz, infrared IR, BLE, LoRa signal and one interface like an MQTT broker 
    Send and receiving command by MQTT
  
     HC SR-501 reading Addon
@@ -45,9 +45,7 @@ void MeasureHCSR501() {
     JsonObject HCSR501data = HCSR501dataBuffer.to<JsonObject>();
     static int pirState = LOW;
     int PresenceValue = digitalRead(HCSR501_GPIO);
-#  if defined(ESP8266) || defined(ESP32)
     yield();
-#  endif
     if (PresenceValue == HIGH) {
       if (pirState == LOW) {
         //turned on
