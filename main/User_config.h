@@ -61,7 +61,7 @@
 #endif
 
 #ifndef Base_Topic
-#  define Base_Topic "smartyme/"
+#  define Base_Topic "smartyme/k001/"
 #endif
 
 /*-------------DEFINE YOUR NETWORK PARAMETERS BELOW----------------*/
@@ -172,16 +172,16 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 #endif
 
 #ifndef MQTT_USER
-#  define MQTT_USER "mqtt"
+#  define MQTT_USER "smartyme"
 #endif
 #ifndef MQTT_PASS
-#  define MQTT_PASS "password"
+#  define MQTT_PASS "smartyme"
 #endif
 #ifndef MQTT_SERVER
 #  define MQTT_SERVER "mqtt.smartyme.de"
 #endif
 #ifndef MQTT_PORT
-#  define MQTT_PORT "8883"
+#  define MQTT_PORT "8884"
 #endif
 
 #ifndef GeneralTimeOut
@@ -202,7 +202,7 @@ const byte mac[] = {0xDE, 0xED, 0xBA, 0xFE, 0x54, 0x95}; //W5100 ethernet shield
 // The certificate must be in PEM ascii format
 
 // If used, this should be set to the root CA certificate to private CA
-#   define PRIVATE_CA 
+#   define PRIVATE_CA true
 #    ifdef PRIVATE_CA
 #      include "certs/private_ca_cert.h"
 #   else
@@ -225,7 +225,7 @@ const char* certificate PROGMEM = R"EOF("
 #  endif
 
 #ifndef MQTT_CERT_VALIDATE_DEFAULT
-#  define MQTT_CERT_VALIDATE_DEFAULT false
+#  define MQTT_CERT_VALIDATE_DEFAULT true
 #endif
 
 #ifndef AWS_IOT
@@ -264,7 +264,7 @@ const char* OTAserver_cert = "";
 #endif
 
 #ifndef MQTT_SECURE_SIGNED_CLIENT
-#  define MQTT_SECURE_SIGNED_CLIENT 0 // If using a signed certificate for the broker and using client certificate/key set this to true or 1
+#  define MQTT_SECURE_SIGNED_CLIENT 1 // If using a signed certificate for the broker and using client certificate/key set this to true or 1
 #endif
 
 #ifndef CNT_DEFAULT_INDEX
