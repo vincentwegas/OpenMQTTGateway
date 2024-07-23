@@ -2126,6 +2126,7 @@ void loop() {
   //esp_task_wdt_reset();
 #endif
 
+  
   unsigned long now = millis();
 
   // Switch off of the LED after TimeLedON
